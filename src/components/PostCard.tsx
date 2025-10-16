@@ -4,6 +4,8 @@ import Image from "next/image";
 import styles from "./PostCard.module.css";
 import { supabase } from "../lib/supabaseClient";
 import { useState } from "react";
+import CommentList from "./CommentList";
+import CommentBox from "./CommentBox";
 
 export type PostUI = {
   id: string;
@@ -59,6 +61,9 @@ export default function PostCard({ post }: { post: PostUI }) {
           <button>💬 {post.comments}</button>
           <button>🔁 {post.shares}</button>
         </footer>
+        <CommentList postId={post.id} />
+<CommentBox postId={post.id} onPosted={() => {}} />
+
       </div>
     </article>
   );

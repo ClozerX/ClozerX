@@ -1,0 +1,19 @@
+.header{
+  position:sticky; top:0; z-index:50;
+  background:rgba(255,255,255,0.85); backdrop-filter: blur(10px);
+  border-bottom:1px solid #eceff4;
+  display:flex; align-items:center; gap:14px; padding:10px 16px;
+}
+.logoWrap{ display:flex; align-items:center; gap:8px; }
+.brand{ font-weight:700; letter-spacing:0.2px; }
+.search{
+  flex:1; border:1px solid #e1e7f0; border-radius:999px; padding:10px 14px; outline:none; background:#fff;
+}
+.actions{ display:flex; align-items:center; gap:8px; }
+.primary{
+  background:#3A8DFF; color:#fff; border:none; border-radius:999px; padding:8px 14px;
+}
+.ghost{
+  background:#fff; border:1px solid #d7deea; border-radius:999px; padding:8px 14px;
+}
+@media (max-width:640px){ .search{ display:none; } }

@@ -1,0 +1,12 @@
+.nav{
+  display:flex; flex-direction:column; gap:8px;
+  position:sticky; top:70px; height:calc(100vh - 70px);
+}
+.item{
+  padding:12px; border-radius:12px; border:1px solid transparent;
+}
+.item:hover{ background:#fff; border-color:#eceff4; box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
+@media (max-width:1100px){
+  .item{ text-indent:-9999px; height:42px; width:42px; border-radius:10px; }
+  .item::after{ content:"•"; text-indent:0; display:inline-block; width:100%; text-align:center; }
+}

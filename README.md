@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ClozerX UI Starter — Instagram Style + Supabase (Posts)
 
-## Getting Started
+This starter gives you:
+- Instagram-like clean white UI (feed + composer + sidebars)
+- Supabase integration for **real posting** (insert & list posts)
+- No auth (public posting) for MVP simplicity (policies included below)
 
-First, run the development server:
-
+## 0) Create a Next.js app
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npx create-next-app clozerx
+cd clozerx
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 1) Install dependency
+```bash
+npm install @supabase/supabase-js
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 2) Add environment variables (`.env.local`)
+Get your values from Supabase **Settings → API**:
+```
+NEXT_PUBLIC_SUPABASE_URL=your-url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 3) Create tables in Supabase (SQL)
+Open **SQL Editor → New Query** and run:
+```sql
+create table if not exists posts (
+  id uuid primary key default uuid_generate_v4(),
+  author_name text,
+  content text,
+  created_at timestamptz default now()
+);
 
-## Learn More
+alter table posts enable row level security;
 
-To learn more about Next.js, take a look at the following resources:
+-- MVP policy (public read/insert). Remove or tighten later.
+create policy "Public read posts" on posts
+  for select using (true);
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+create policy "Public insert posts" on posts
+  for insert with check (true);
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 4) Copy these files into your project
+- `src/app/page.tsx`
+- `src/app/globals.css`
+- `src/app/styles.module.css`
+- `src/components/*`
+- `src/lib/supabaseClient.ts`
+- `public/logo.svg`
 
-## Deploy on Vercel
+## 5) Run
+```bash
+npm run dev
+```
+Open http://localhost:3000
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Notes
+- This MVP uses **client-side** Supabase for simplicity.
+- Later, add Auth and switch to server actions/RLS per user.

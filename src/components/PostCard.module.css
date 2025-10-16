@@ -1,0 +1,15 @@
+.card{
+  display:flex; gap:12px;
+  background:#fff; border:1px solid #eceff4; border-radius:16px; padding:14px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.avatar{ border-radius:999px; }
+.body{ flex:1; }
+.head{ display:flex; align-items:center; justify-content:space-between; }
+.line1{ display:flex; align-items:center; gap:8px; }
+.time{ color:#9ca3af; font-size:12px; }
+.content{ margin:8px 0; line-height:1.55; white-space:pre-wrap; }
+.meta{ display:flex; gap:10px; }
+.meta button{
+  border:none; background:#f7f9fc; border:1px solid #eef2f7; border-radius:999px; padding:6px 10px;
+}

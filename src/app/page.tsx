@@ -21,11 +21,12 @@ export default function Home(){
 
   async function loadPosts(){
     setLoading(true);
-    const { data, error } = await supabase
-      .from("posts")
-      .select("*")
-      .order("created_at", { ascending: false })
-      .limit(50);
+const { data, error } = await supabase
+  .from("posts")
+  .select("id, author_name, content, created_at, likes")
+  .order("created_at", { ascending: false })
+  .limit(50);
+
     if(!error && data) setPosts(data as DBPost[]);
     setLoading(false);
   }
